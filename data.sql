@@ -50,7 +50,6 @@ INSERT INTO specializations (vet_id, species_id) VALUES
 ((SELECT id FROM vets WHERE name = 'Stephanie Mendez'), (SELECT id FROM species WHERE name = 'Pokemon')),
 ((SELECT id FROM vets WHERE name = 'Jack Harkness'), (SELECT id FROM species WHERE name = 'Digimon'));
 
--- visits
 INSERT INTO visits (animal_id, vet_id, date_of_visit) 
 VALUES 
 ((SELECT id FROM animals WHERE name = 'Agumon'), (SELECT id FROM vets WHERE name = 'William Tatcher'), '2020-05-24'),
