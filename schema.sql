@@ -6,7 +6,7 @@ CREATE TABLE animals (
     date_of_birth DATE NOT NULL,
     escape_attempts INT NOT NULL,
     neutered BOOLEAN NOT NULL,
-    weight_kg DECIMAL NOT NULL,
+    weight_kg DECIMAL NOT NULL
 );
 ALTER TABLE animals ADD species varchar(100);
 
@@ -23,16 +23,16 @@ CREATE TABLE species (
 );
 
 
-ALTER TABLE animals 
+ALTER TABLE animals;
 DROP COLUMN species;
-ALTER TABLE animals
-ADD COLUMN species_id INTEGER,
-ADD CONSTRAINT species_key FOREIGN KEY (species_id) REFERENCES species(id)
+ALTER TABLE animals;
+ADD COLUMN species_id INTEGER;
+ADD CONSTRAINT species_key FOREIGN KEY (species_id) REFERENCES species(id);
 ON DELETE CASCADE;
 
-ALTER TABLE animals
-ADD COLUMN owner_id INTEGER,
-ADD CONSTRAINT owners_key FOREIGN KEY (owner_id) REFERENCES owners(id)
+ALTER TABLE animals;
+ADD COLUMN owner_id INTEGER;
+ADD CONSTRAINT owners_key FOREIGN KEY (owner_id) REFERENCES owners(id);
 ON DELETE CASCADE;
 
 CREATE TABLE vets (
@@ -64,3 +64,13 @@ CREATE TABLE visits (
   FOREIGN KEY (vet_id) REFERENCES vets(id)
   ON DELETE CASCADE
 );
+ALTER TABLE visits DROP CONSTRAINT visits_pkey; 
+ALTER TABLE visits DROP COLUMN id;
+ALTER TABLE visits ALTER COLUMN animal_id SET NOT NULL;
+ALTER TABLE visits ALTER COLUMN vet_id SET NOT NULL,ALTER COLUMN date_of_visit SET NOT NULL;
+CREATE INDEX animal_idx ON visits(animal_id); 
+CREATE INDEX vet_idx ON visits(vet_id); 
+
+ALTER TABLE owners ALTER COLUMN age DROP NOT NULL;
+ALTER TABLE owners ADD COLUMN email VARCHAR(120);
+CREATE INDEX email_idx ON owners(email);
