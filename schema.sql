@@ -73,4 +73,4 @@ CREATE INDEX vet_idx ON visits(vet_id);
 
 ALTER TABLE owners ALTER COLUMN age DROP NOT NULL;
 ALTER TABLE owners ADD COLUMN email VARCHAR(120);
-
+CREATE INDEX email_idx ON owners(email);
